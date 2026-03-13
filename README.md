@@ -126,5 +126,5 @@ python producer.py
 
 
 
-!\[Демонстрация работы Producer и Consumer](screenshot.jpg)
+!\[Демонстрация работы Producer и Consumer](cmd screen.jpg)
 
