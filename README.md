@@ -18,7 +18,7 @@
 
 ```
 kafka-lab/
-├── message_generator.py  # Генерация случайных сообщений (вне Producer — принцип SOLID)
+├── message\_generator.py  # Генерация случайных сообщений (вне Producer — принцип SOLID)
 ├── producer.py           # Отправка сообщений в Kafka-топик
 ├── consumer.py           # Чтение и валидация сообщений из Kafka-топика
 └── requirements.txt      # Зависимости Python
@@ -28,10 +28,10 @@ kafka-lab/
 
 ```json
 {
-  "order_id": "RP-4821",
+  "order\_id": "RP-4821",
   "client": "Иванов А.С.",
-  "device_type": "Смартфон",
-  "fault_type": "Треснул экран",
+  "device\_type": "Смартфон",
+  "fault\_type": "Треснул экран",
   "engineer": "Смирнов И.В.",
   "part": "Дисплей",
   "status": "В работе",
@@ -42,14 +42,14 @@ kafka-lab/
 
 ## Правила валидации (Consumer)
 
-| Поле | Условие невалидности |
-| --- | --- |
-| `order_id` | не начинается с `RP-` или длина меньше 7 символов |
-| `status` | не входит в список допустимых значений |
-| `price` | не целое число или выходит за диапазон 1–100000 |
-| `client` | пустая строка |
-| `engineer` | пустая строка |
-| обязательные поля | отсутствует любое из 9 полей |
+|Поле|Условие невалидности|
+|-|-|
+|`order\_id`|не начинается с `RP-` или длина меньше 7 символов|
+|`status`|не входит в список допустимых значений|
+|`price`|не целое число или выходит за диапазон 1–100000|
+|`client`|пустая строка|
+|`engineer`|пустая строка|
+|обязательные поля|отсутствует любое из 9 полей|
 
 ## Запуск
 
@@ -59,34 +59,34 @@ kafka-lab/
 * Python 3.8+
 * Apache Kafka 4.2.0
 
-### 1. Установить зависимости Python
+### 1\. Установить зависимости Python
 
 ```
 pip install -r requirements.txt
 ```
 
-### 2. Инициализировать Kafka (только один раз)
+### 2\. Инициализировать Kafka (только один раз)
 
 ```
-cd C:\path\to\kafka
+cd C:\\path\\to\\kafka
 
-bin\windows\kafka-storage.bat random-uuid
-bin\windows\kafka-storage.bat format --standalone -t <UUID> -c config\server.properties
+bin\\windows\\kafka-storage.bat random-uuid
+bin\\windows\\kafka-storage.bat format --standalone -t <UUID> -c config\\server.properties
 ```
 
-### 3. Запустить Kafka (окно 1)
+### 3\. Запустить Kafka (окно 1)
 
 ```
-bin\windows\kafka-server-start.bat config\server.properties
+bin\\windows\\kafka-server-start.bat config\\server.properties
 ```
 
-### 4. Запустить Consumer (окно 2)
+### 4\. Запустить Consumer (окно 2)
 
 ```
 python consumer.py
 ```
 
-### 5. Запустить Producer (окно 3)
+### 5\. Запустить Producer (окно 3)
 
 ```
 python producer.py
@@ -97,27 +97,34 @@ python producer.py
 **Producer:**
 
 ```
-[PRODUCER] Отправка НЕВАЛИДНОГО сообщения:
-{"order_id": "X", "client": "", "status": "НЕИЗВЕСТЕН", "price": -500, ...}
-[PRODUCER] Сообщение отправлено | Партиция: 0 | Смещение: 0
+\[PRODUCER] Отправка НЕВАЛИДНОГО сообщения:
+{"order\_id": "X", "client": "", "status": "НЕИЗВЕСТЕН", "price": -500, ...}
+\[PRODUCER] Сообщение отправлено | Партиция: 0 | Смещение: 0
 
-[PRODUCER] Сгенерировано сообщение:
-{"order_id": "RP-4821", "client": "Иванов А.С.", "device_type": "Смартфон", ...}
-[PRODUCER] Сообщение отправлено | Партиция: 0 | Смещение: 1
+\[PRODUCER] Сгенерировано сообщение:
+{"order\_id": "RP-4821", "client": "Иванов А.С.", "device\_type": "Смартфон", ...}
+\[PRODUCER] Сообщение отправлено | Партиция: 0 | Смещение: 1
 ```
 
 **Consumer:**
 
 ```
-[CONSUMER] Получено сообщение:
-{"order_id": "X", "client": "", "status": "НЕИЗВЕСТЕН", "price": -500, ...}
-[CONSUMER] NOT VALID
+\[CONSUMER] Получено сообщение:
+{"order\_id": "X", "client": "", "status": "НЕИЗВЕСТЕН", "price": -500, ...}
+\[CONSUMER] NOT VALID
            - Некорректный номер заказа: 'X'. Ожидается формат RP-XXXX
            - Недопустимый статус заказа: 'НЕИЗВЕСТЕН'
            - Некорректная стоимость: -500. Допустимо: 1-100000
            - Поле 'client' не может быть пустым
 
-[CONSUMER] Получено сообщение:
-{"order_id": "RP-4821", "client": "Иванов А.С.", "device_type": "Смартфон", ...}
-[CONSUMER] VALID  |  Заказ RP-4821 | Клиент: Иванов А.С. | Статус: В работе
+\[CONSUMER] Получено сообщение:
+{"order\_id": "RP-4821", "client": "Иванов А.С.", "device\_type": "Смартфон", ...}
+\[CONSUMER] VALID  |  Заказ RP-4821 | Клиент: Иванов А.С. | Статус: В работе
 ```
+
+\## Скриншоты
+
+
+
+!\[Демонстрация работы Producer и Consumer](screenshot.jpg)
+
